@@ -46,7 +46,7 @@ public class BanktransactionstreambackwordApplication {
         
         StreamsBuilder builder = new StreamsBuilder();
 
-        KStream<String, JsonNode> bankTransactions = builder.stream("kafka-testing7",
+        KStream<String, JsonNode> bankTransactions = builder.stream("bank3",
                 Consumed.with(Serdes.String(), jsonSerde));
 
 
@@ -69,7 +69,7 @@ public class BanktransactionstreambackwordApplication {
                                 .withValueSerde(jsonSerde)
                 );
 
-        bankBalance.toStream().to("kafka-testing8", Produced.with(Serdes.String(), jsonSerde));
+        bankBalance.toStream().to("bank4", Produced.with(Serdes.String(), jsonSerde));
 
         KafkaStreams streams = new KafkaStreams(builder.build(), config);
         streams.cleanUp();
